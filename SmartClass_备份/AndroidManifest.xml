@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+      package="com.lnu.activity"
+      android:versionCode="1"
+      android:versionName="1.0">
+    <application android:icon="@drawable/l_coin" android:label="@string/app_name">
+        <activity android:name=".MainMenuActivity"
+                  android:label="@string/loginTitle">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        
+        <!-- android:theme="@android:style/Theme.Dialog" -->
+        <activity android:name=".LogInActicity" android:label="登陆界面"
+		/>
+       <activity android:name=".IndexPageActivity" android:label="登陆后的页面"
+		/>
+	   <activity android:name=".RegisterActivity" android:label="注册"
+		/>
+	   <activity android:name=".HomeWorkActivity" android:label="作业发布"
+		/>
+	   <activity android:name=".SignInActivity" android:label="点名"
+		/>
+	   <activity android:name=".EmptyActivity" android:label="空"
+		/>
+	   
+    </application>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-sdk android:minSdkVersion="3" />
+</manifest> 
