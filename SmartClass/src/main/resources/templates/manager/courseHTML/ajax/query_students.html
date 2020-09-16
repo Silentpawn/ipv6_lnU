@@ -1,0 +1,196 @@
+<table class="show-table-commit control-name-width" th:if="${list.size()!=0}">
+	<tr class="show-tr">
+		<th>序号</th>
+		<th>学院</th>
+		<th>年级</th>
+		<th>专业</th>
+		<th>学号</th>
+		<th>姓名</th>
+		<th>
+			<span class="left-margin">操作</span>
+		</th>
+	</tr>
+	<tr class="show-tr-min student-tr-js" th:each="student,st:${list}" th:object="${student}">
+		<td th:sid="*{id}" th:text="${st.count}"></td>
+		<td th:text="*{college}">
+		</td>
+		<td th:text="*{grade}">
+		</td>
+		<td th:text="*{profession}">
+		</td>
+		<td th:text="*{sno}">
+		</td>
+		<td th:text="*{name}">
+		</td>
+		<td>
+			<span class="glyphicon glyphicon-plus left-margin operate operate-min" onClick="plus(this);"></span>
+		</td>
+	</tr>
+</table>
+<ul class="input-ul" th:if="${list.size()!=0}">
+	<li class="input-li">
+		<button type="button" class="input-border-no-radius page-margin" id="firstPage">首页</button>
+		<button type="button" class="input-border-no-radius" id="previousPage">上一页</button>
+		<button type="button" class="input-border-no-radius" id="nextPage">下一页</button>
+		<button type="button" class="input-border-no-radius" id="lastPage">尾页</button>
+		<span class="input-title middle-input-title" style="letter-spacing: 2px">
+			当前第
+			<span id="nowpagecopy">1</span>
+			页，共
+			<span id="totalpagescopy">1</span>
+			页，到第
+		</span>
+		<span class="input-border-no-radius kkkkkk">
+			<input type="text" name="toPgae" class="input-text input-number" value="1" maxlength="3" />
+		</span>
+		<span class="input-title middle-input-title"> 页</span>
+		<button type="button" class="input-border-no-radius middle-input-title" id="toPage-button">确定</button>
+	</li>
+</ul>
+<table class="show-table-commit control-name-width" th:if="${list.size()==0}">
+	<tr class="show-tr" tips>
+		<th>数据库中没有符合条件的学生。</th>
+	</tr>
+</table>
+<div class="info">
+	<div>
+		<span id="nowPage" th:text="${pageVO.nowPage}"> </span>
+		<span id="totalPages" th:text="${pageVO.totalPages}"> </span>
+	</div>
+</div>
+
+<script type="text/javascript">
+$(function(){
+
+
+	//以下是翻页相关逻辑
+
+	$(".kkkkkk").click(function() {
+		$("[name='toPgae']").focus();
+	});
+
+	$("#nowpagecopy").text($("#nowPage").text());
+	$("#totalpagescopy").text($("#totalPages").text());
+
+	function page_ajax(nowPage, totalPages) {
+
+		var lastclick = 'studentPO.' + $("[lastclick]").text();
+		var lastinput = $("[lastinput]").text();
+
+		$.ajax({
+			url :  "/SmartClass/courseAJAX/queryStudent",
+			async: false,
+			type: "POST",
+			data: {
+				"nowPage": nowPage,
+			},
+			success: function(data) {
+				$(".query_students_ajax").html(data);
+			}
+		});
+		$("#nowpagecopy").text(nowPage);
+		$("#totalpagescopy").text(totalPages);
+		
+		$("#lastPage").removeAttr("disabled");
+		$("#nextPage").removeAttr("disabled");
+		$("#firstPage").removeAttr("disabled");
+		$("#previousPage").removeAttr("disabled");
+		
+		if(nowPage == 1){
+			$("#firstPage").attr("disabled",true);
+			$("#previousPage").attr("disabled",true);
+		}
+		
+		if(nowPage == totalPages){
+			$("#lastPage").attr("disabled",true);
+			$("#nextPage").attr("disabled",true);
+		}
+	}
+
+	//下一页
+	$('#nextPage').click(function() {
+		
+		var nowPage = parseInt($("#nowPage").text());
+		var totalPages = parseInt($("#totalPages").text());
+
+		if (nowPage < totalPages) {
+			nowPage = nowPage + 1;
+		}
+
+		page_ajax(nowPage, totalPages);
+	});
+
+	//上一页
+	$('#previousPage').click(function() {
+		var nowPage = parseInt($("#nowPage").text());
+		var totalPages = parseInt($("#totalPages").text());
+
+		if (nowPage > 1) {
+			nowPage--;
+		}
+
+		page_ajax(nowPage, totalPages);
+	});
+
+	//首页
+	$('#firstPage').click(function() {
+		var nowPage = parseInt($("#nowPage").text());
+		var totalPages = parseInt($("#totalPages").text());
+
+		nowPage = 1;
+
+		page_ajax(nowPage, totalPages);
+	});
+
+	//尾页
+	$('#lastPage').click(function() {
+
+		var totalPages = parseInt($("#totalPages").text());
+
+		var nowPage = totalPages;
+
+		page_ajax(nowPage, totalPages);
+	});
+
+	//指定页
+	$('#toPage-button').click(function() {
+
+		var toPage = parseInt($("[name='toPgae']").val());
+		var nowPage = parseInt($("#nowPage").text());
+		var totalPages = parseInt($("#totalPages").text());
+
+		//		alert_text(toPage+" "+nowPage+" "+totalPages);
+
+		if (toPage == nowPage) {
+			return;
+		} else if (toPage < 1 || toPage > totalPages) {
+			alert_text("warning","输入页码范围要在 1-" + totalPages + " 之间");
+		} else if (isNaN(toPage)) {
+			alert_text("warning","输入页码应为数字");
+		} else {
+			nowPage = toPage;
+		}
+
+		page_ajax(nowPage, totalPages);
+	});
+	
+	var nowPage = parseInt($("#nowPage").text());
+	var totalPages = parseInt($("#totalPages").text());
+	
+	$("#lastPage").removeAttr("disabled");
+	$("#nextPage").removeAttr("disabled");
+	$("#firstPage").removeAttr("disabled");
+	$("#previousPage").removeAttr("disabled");
+	
+	if(nowPage == 1){
+		$("#firstPage").attr("disabled",true);
+		$("#previousPage").attr("disabled",true);
+	}
+	
+	if(nowPage == totalPages){
+		$("#lastPage").attr("disabled",true);
+		$("#nextPage").attr("disabled",true);
+	}
+	
+});
+</script>

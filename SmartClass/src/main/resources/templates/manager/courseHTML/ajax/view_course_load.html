@@ -1,0 +1,63 @@
+
+<div class="clearfix">
+	<span class="rectangle" style="margin: 10px 0 0 20px;"></span>
+	<span class="title" style="margin-top: 10px;">
+		<span class="bold">课程名称：</span>
+		<span th:text="${course.name}"></span>
+	</span>
+</div>
+<table style="margin-top: 25px; margin-left: 20px;">
+	<tbody>
+		<tr>
+			<td>
+				<span class="input-title">
+					<span class="bold">开课时间：</span>
+					<span th:text="${course.starttime}"></span>
+				</span>
+			</td>
+			<td>
+				<span class="input-title ">
+					<span class="bold space">结束时间：</span>
+					<span th:text="${course.endtime}"></span>
+				</span>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<span class="input-title ">
+					<span class="bold ">开课教师：</span>
+					<span th:text="${course.teacher.name}"></span>
+				</span>
+			</td>
+			<td>
+				<span class="input-title ">
+					<span class="bold space">开课地点：</span>
+					<span th:text="${course.location}"></span>
+				</span>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<span class="input-title ">
+					<span class="bold ">课程学分：</span>
+					<span th:text="${course.credit}"></span>
+					<span>分</span>
+				</span>
+			</td>
+			<td>
+				<span class="input-title ">
+					<span class="bold space">参与人数：</span>
+					<span th:text="${course.students.size()} + '/' +${course.studentNumber}"></span>
+				</span>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<ul class="input-ul" style="margin: 20px 25px 25px 20px;">
+	<li class="input-li" style="margin-top: 0">
+		<div class="input-title" style="text-align: justify;">
+			<span class="bold">课程介绍：</span>
+			<span th:text="${course.info}"></span>
+		</div>
+	</li>
+</ul>

@@ -1,0 +1,38 @@
+
+<tr class="show-tr">
+	<th>序号</th>
+	<th>学院</th>
+	<th>年级</th>
+	<th>专业</th>
+	<th>班级</th>
+	<th>学号</th>
+	<th>姓名</th>
+	<th style="text-align: center">性别</th>
+	<th style="text-align: center">
+		<span class="left-margin">操作</span>
+	</th>
+</tr>
+<tr class="show-tr-min show-hover" th:each="student,st:${list}" th:object="${student}">
+	<td th:text="${st.count}"></td>
+	<td th:text="*{college}"></td>
+	<td th:text="*{grade}"></td>
+	<td th:text="*{profession}"></td>
+	<td th:text="*{classname}"></td>
+	<td th:text="*{sno}"></td>
+	<td th:text="*{name}"></td>
+	<td th:text="*{sex}" style="text-align: center"></td>
+	<td style="text-align: center">
+		<span class="glyphicon glyphicon-pencil left-margin operate operate-min" onclick="edit(this)" th:sid="*{id}"> </span>
+<!-- 		<span class="left-margin operate glyphicon glyphicon-book" onclick="view(this)" style="line-height: 25px" th:sid="*{id}"> </span> -->
+	</td>
+	<!-- unoperate -->
+</tr>
+
+<tr class="info">
+	<td>
+		<span id="nowPage" th:text="${pageVO.nowPage}">
+		</span>
+		<span id="totalPages" th:text="${pageVO.totalPages}">
+		</span>
+	</td>
+</tr>

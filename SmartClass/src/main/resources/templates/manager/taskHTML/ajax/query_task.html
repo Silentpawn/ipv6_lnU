@@ -1,0 +1,116 @@
+<table class="show-table show-table-activities">
+	<tr class="show-tr">
+		<th>序号</th>
+		<th>题干</th>
+		<th>作者</th>
+		<th>
+			<span class="left-margin">修改删除</span>
+		</th>
+	</tr>
+	<tr class="show-tr show-hover" th:each="task,st:${list}" th:tid="${task.id}">
+		<td th:aid="${task.id}" th:text="${st.count}"></td>
+		<td th:text="${task.title}" width="50%" style="text-overflow:ellipsis;"></td>
+		<td th:text="${task.author}"></td>
+		<td class="op">
+			<span th:if="${task.update}" class="glyphicon glyphicon-pencil left-margin operate"></span>
+			<span th:unless="${task.update}" class="glyphicon glyphicon-pencil left-margin operate" disable></span>
+			<span th:if="${task.delete}" class="glyphicon glyphicon-trash left-margin operate"></span>
+			<span th:unless="${task.delete}" class="glyphicon glyphicon-trash left-margin operate" disable></span>
+		</td>
+	</tr>
+</table>
+<table th:if="${list.size()==0}" class="show-table show-table-activities">
+	<tr class="show-tr">
+		<th>数据库中没有记录。</th>
+	</tr>
+</table>
+<div class="info">
+	<div>
+		<span id="nowPage" th:text="${pageVO.nowPage}"> </span>
+		<span id="totalPages" th:text="${pageVO.totalPages}"> </span>
+	</div>
+</div>
+<script type="text/javascript">
+
+$(function(){
+
+	//删除活动deleteActivity
+	$(".glyphicon.glyphicon-trash ").click(function(){
+		confirm_text("确认删除该习题？",$(this),function(which){
+			$.ajax({
+				type:'post',
+				url:"/SmartClass/taskAPI/deleteTask",
+				data: {
+					'id': $(which).parents(".show-tr").attr("tid"),
+				},
+				async: false,
+				success: function(data) {
+					//alert_text(data);
+					if(data.status=="ok")
+					{
+						alert_text("ok","删除成功",function(){history.go(0);});
+					}else{
+						alert_text("warning",data.msg,function(){history.go(0);});
+					}
+
+
+				}
+			});
+		});
+
+
+	});
+
+	//修改活动
+	$(".glyphicon-pencil").click(function(){
+		$.ajax({
+			type:'post',
+			url:"/SmartClass/taskAJAX/editTask",
+			dataType: 'text', 
+			data: {
+				'id': $(this).parents(".show-tr").attr("tid"),
+			},
+			async: false,
+			success: function(data) {
+
+				$("#big-util-modal-ajax").html(data);
+
+			}
+		});
+
+		$("[modal-title]").text("修改活动信息");
+		$("#big-util-modal").modal();
+
+	});
+
+	//查看课程
+/* 	$(".show-hover").children("td").not(".op").click(function(){
+
+		$.ajax({
+			type:'post',
+			url:"/SmartClass/courseAJAX/viewCourse",
+			dataType: 'text', 
+			data: {
+				'id': $(this).parents(".show-hover").attr("cid"),
+			},
+			async: false,
+			success: function(data) {
+
+
+				$("#big-util-modal-ajax").html(data);
+
+			}
+		});
+
+		$("[modal-title]").text("活动详细信息");
+		$("#big-util-modal").modal();
+
+	}); */
+
+	$("[disable]").off("click");
+	$("[disable]").attr("style","color:#ddd");
+
+});
+
+
+</script>

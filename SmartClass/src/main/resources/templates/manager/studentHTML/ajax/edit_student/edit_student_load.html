@@ -1,0 +1,35 @@
+<script type="text/javascript" src="/SmartClass/manager/js/queryStudentPage/edit_student.js"></script>
+<form action="" method="post" id="update_student">
+	<ul class="input-ul" style="width: 550px; margin: 20px auto 0 auto;" th:object="${student}">
+	<input type="hidden" name="id" th:value="*{id}"/>
+		<li class="input-li"><span class="input-title">学院：</span> <span class="input-border"> <input type="text"
+					class="input-text short" name="college" placeholder="在此处填写学院" th:value="*{college}"
+				/>
+		</span><span class="input-title" style="margin-left: 20px;">年级：</span> <span class="input-border" disabled> <input type="text"
+					class="input-text short" th:value="*{grade}+${' (不能修改)'}"
+				/>
+		</span></li>
+		<li class="input-li"><span class="input-title">专业：</span> <span class="input-border"> <input type="text"
+					class="input-text short" name="profession" placeholder="在此处填写新的专业" th:value="*{profession}"
+				/>
+		</span><span class="input-title" style="margin-left: 20px;">班级：</span> <span class="input-border"> <input type="text"
+					class="input-text short" name="classname" placeholder="在此处填写新的班级" th:value="*{classname}"
+				/>
+		</span></li>
+		<li class="input-li"><span class="input-title">学号：</span> <span class="input-border" disabled> <input type="text"
+					class="input-text short" th:value="*{sno}+${' (不能修改)'}"
+				/>
+		</span><span class="input-title" style="margin-left: 20px;">姓名：</span> <span class="input-border" disabled> <input type="text"
+					class="input-text short" th:value="*{name}+${' (不能修改)'}"
+				/>
+		</span>
+		
+		<li class="input-li hidden" id="error_msg"><span class="glyphicon glyphicon-exclamation-sign"
+			style="color: red; margin-right: 5px;"
+		></span> <span id="err" style="color: red;"></span></li>
+	</ul>
+</form>
+<div class="clearfix" style="width: 521px; margin: 25px 124px 25px; display: block;">
+	<button class="modal-submit pull-left" id="edit_student" style="width: 250px; margin-left: 0; margin-right: 10px">确认修改学生信息</button>
+	<button class="modal-submit pull-right" id="reset" style="width: 250px;">重置</button>
+</div>

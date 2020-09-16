@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>课堂辅助系统</title>
+<link rel="stylesheet" type="text/css" href="bootstrap-3.3.7-dist/css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="css/bootstrap-datetimepicker.css">
+<link rel="stylesheet" type="text/css" href="css/manager.css" />
+<link rel="stylesheet" type="text/css" href="css/modal.css" />
+<script type="text/javascript" src="js/jquery-3.2.1.js"></script>
+<script type="text/javascript" src="bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+<script type="text/javascript" src="js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="js/bootstrap-datetimepicker.zh-CN.js"></script>
+<script type="text/javascript" src="js/welcomePage/welcome.js"></script>
+<script type="text/javascript" th:src="@{/util.js}"></script>
+<style>
+#loading {
+	height: 210px;
+	width: 100%;
+	position: relative;
+	z-index: 1;
+	margin-top: 0px;
+	top: 0px;
+}
+
+#loading-center {
+	width: 100%;
+	height: 100%;
+	position: relative;
+}
+
+#loading-center-absolute {
+	position: absolute;
+	left: 50%;
+	top: 45%;
+	height: 200px;
+	width: 200px;
+	margin-top: -100px;
+	margin-left: -100px;
+	-ms-transform: rotate(-135deg);
+	-webkit-transform: rotate(-135deg);
+	transform: rotate(-135deg);
+}
+
+.object {
+	-moz-border-radius: 50% 50% 50% 50%;
+	-webkit-border-radius: 50% 50% 50% 50%;
+	border-radius: 50% 50% 50% 50%;
+	position: absolute;
+	border-top: 5px solid #EA5E28;
+	border-bottom: 5px solid transparent;
+	border-left: 5px solid #3E8CDA;
+	border-right: 5px solid transparent;
+	-webkit-animation: animate 2s infinite;
+	animation: animate 2s infinite;
+}
+
+#object_one {
+	left: 75px;
+	top: 75px;
+	width: 50px;
+	height: 50px;
+}
+
+#object_two {
+	left: 65px;
+	top: 65px;
+	width: 70px;
+	height: 70px;
+	-webkit-animation-delay: 0.2s;
+	animation-delay: 0.2s;
+}
+
+#object_three {
+	left: 55px;
+	top: 55px;
+	width: 90px;
+	height: 90px;
+	-webkit-animation-delay: 0.4s;
+	animation-delay: 0.4s;
+}
+
+#object_four {
+	left: 45px;
+	top: 45px;
+	width: 110px;
+	height: 110px;
+	-webkit-animation-delay: 0.6s;
+	animation-delay: 0.6s;
+}
+
+@
+-webkit-keyframes animate { 50% {
+	-ms-transform: rotate(360deg) scale(0.8);
+	-webkit-transform: rotate(360deg) scale(0.8);
+	transform: rotate(360deg) scale(0.8);
+}
+
+}
+@
+keyframes animate { 50% {
+	-ms-transform: rotate(360deg) scale(0.8);
+	-webkit-transform: rotate(360deg) scale(0.8);
+	transform: rotate(360deg) scale(0.8);
+}
+}
+</style>
+</head>
+<body data-function="welcome">
+	<nav class="navbar navbar-inverse navbar-gray">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="../index/index"> <img style="height: 100%" src="images/logo_white.png">
+				</a> <a class="navbar-text" href="">课堂辅助系统</a>
+			</div>
+			<ul class="nav navbar-nav navbar-right">
+				<li>
+					<a class="" href="/SmartClass/manager/welcome#/SmartClass/userHTML/editPassword"  style="letter-spacing: 3px;"  >修改我的密码</a>
+				</li>
+				<li>
+					<a class="" href="/SmartClass/login/logout">注销</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+	<div class="sidebar sidebar-gray">
+		<div class="sidebar-header clearfix" th:user="${session.loginUser}">
+			<img class="img-circle" src="images/img.png" >
+			<div class="text-center" th:if="${session['loginUser']=='admin'}" th:text="${session.admin!=null?session.admin.username:null}"></div>
+			<div class="text-center" th:if="${session['loginUser']=='teacher'}" th:text="${session.teacher!=null?session.teacher.name:null}"></div>
+		</div>
+		<div class="sidebar-content">
+			<ul class="list-group">
+				<li>
+					<a class="list-group-item second" idstring="/SmartClass/welcomeHTML/welcome_content">课堂辅助系统</a>
+				</li>
+				<li class="list-group-item first collapse in" data-toggle="collapse" data-target="#list1">
+					<span class="glyphicon glyphicon-triangle-bottom arrow"></span>
+					课程管理
+				</li>
+				<ul class="list-group collapse in" id="list1">
+					<li>
+						<a class="list-group-item second" idstring="/SmartClass/courseHTML/create_course_page">创建课程</a>
+					</li>
+					<li>
+						<a class="list-group-item second" idstring="/SmartClass/courseHTML/query_course_page">课程列表</a>
+					</li>
+					<li>
+						<a class="list-group-item second" idstring="/SmartClass/courseHTML/student_course_page">管理课程学员</a>
+					</li>
+				</ul>
+				<li class="list-group-item first collapse in" data-toggle="collapse" data-target="#list1">
+					<span class="glyphicon glyphicon-triangle-bottom arrow"></span>
+					作业管理
+				</li>
+				<ul class="list-group collapse in" id="list1">
+					<li>
+						<a class="list-group-item second" idstring="/SmartClass/taskHTML/assign_task_page">布置作业</a>
+					</li>
+					<li>
+						<a class="list-group-item second" idstring="/SmartClass/taskHTML/query_task_page">习题列表</a>
+					</li>
+					<li>
+						<a class="list-group-item second" idstring="/SmartClass/taskHTML/create_task_page">习题作业</a>
+					</li>
+				</ul>
+				<li class="list-group-item first" data-toggle="collapse" data-target="#list2">
+					<span class="glyphicon glyphicon-triangle-bottom arrow"></span>
+					学生管理
+				</li>
+				<ul class="list-group collapse in" id="list2">
+					<li>
+						<a class="list-group-item second" idstring="/SmartClass/studentHTML/query_students_page">浏览学生</a>
+					</li>
+				</ul>
+				<li class="list-group-item first" data-toggle="collapse" data-target="#list3" th:if="${session['loginUser']=='admin'}">
+					<span class="glyphicon glyphicon-triangle-bottom arrow"></span>
+					用户管理
+				</li>
+				<ul class="list-group collapse in" id="list3" th:if="${session['loginUser']=='admin'}">
+					<li>
+						<a class="list-group-item second" idstring="/SmartClass/userHTML/query_users_page" th:if="${session['loginUser']=='admin'}">用户列表</a>
+					</li>
+					<li>
+						<a class="list-group-item second" idstring="/SmartClass/userHTML/create_user_page" th:if="${session['loginUser']=='admin'}">创建管理用户</a>
+					</li>
+				</ul>
+			</ul>
+		</div>
+		<div class="function-contents"></div>
+	</div>
+	<!-- create_activity 输入账户密码 -->
+	<div class="modal" id="create_activity_addStatisticsManager" style="margin-top: 200px">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">×</button>
+					<h4 class="modal-title">创建统计负责人账户</h4>
+				</div>
+				<div class="modal-body">
+					<div class="modal-area">
+						<div class="text-center">
+							<span class="input-title">统计负责人账户：</span>
+							<span class="modal-border">
+								<input type="text" class=".modal-text-old modal-input" id="StatisticsManager_user" placeholder="统计负责人账户只能以字母开头">
+							</span>
+						</div>
+						<div class="text-center" style="margin-top: 15px">
+							<span class="input-title">统计负责人密码：</span>
+							<span class="modal-border">
+								<input type="password" class=".modal-text-old modal-input" id="StatisticsManager_password" placeholder="在此处输入密码">
+							</span>
+						</div>
+						<div class="warmsg" style="margin-top: 15px">
+							<span class="glyphicon glyphicon-exclamation-sign" style="color: red; margin-left: 10px;"></span>
+							<span id="warning-message" style="color: red;"></span>
+						</div>
+						<div class="clearfix modal-center" style="width: 329px;">
+							<button class="modal-submit modal-width pull-left" id="add-button" onclick="plus()">确认添加</button>
+							<button data-dismiss="modal" class="modal-submit modal-width pull-left">取消</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- activity_recycleBin 重置统计负责人账户密码 -->
+	<div class="modal" id="reset_statisticsManager" style="margin-top: 200px">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">×</button>
+					<h4 class="modal-title">重置统计负责人账户</h4>
+				</div>
+				<div class="modal-body">
+					<div class="modal-area">
+						<div class="text-center">
+							<span class="input-title">统计负责人账户：</span>
+							<span class="modal-border">
+								<input type="text" class=".modal-text-old modal-input" id="reset_StatisticsManager_user" placeholder="统计负责人账户只能以字母开头">
+							</span>
+						</div>
+						<div class="text-center" style="margin-top: 15px">
+							<span class="input-title">统计负责人密码：</span>
+							<span class="modal-border">
+								<input type="password" class=".modal-text-old modal-input" id="reset_StatisticsManager_password" placeholder="在此处输入密码">
+							</span>
+						</div>
+						<div class="warmsg" style="margin-top: 15px">
+							<span class="glyphicon glyphicon-exclamation-sign" style="color: red; margin-left: 10px;"></span>
+							<span id="reset_warning-message" style="color: red;"></span>
+						</div>
+						<div class="clearfix modal-center" style="width: 329px;">
+							<button class="modal-submit modal-width pull-left" id="reset-submit" aid="???">确认</button>
+							<button data-dismiss="modal" class="modal-submit modal-width pull-left">取消</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- commit_activity 提交成功模态窗 -->
+	<div class="modal" id="commit_modal" style="margin-top: 200px">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">×</button>
+					<h4 class="modal-title">确认提交报名名单</h4>
+				</div>
+				<div class="modal-body">
+					<div class="modal-area">
+						<div class="text-center">
+							<span>已经准备好为 [</span>
+							<span class="selected-aname"></span>
+							<span>] 活动 [</span>
+							<span class="count-party-students"></span>
+							] 人提交名单
+						</div>
+						<div class="text-center">提交后将为学生报名，请仔细核对活动及对应报名名单</div>
+						<div class="clearfix modal-center" style="width: 329px;">
+							<button class="modal-submit modal-width pull-left" id="modal-commit-button">提交报名表</button>
+							<button data-dismiss="modal" class="modal-submit modal-width pull-left">取消</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- confirm_activity 确认出席活动模态窗 -->
+	<div class="modal" id="confirm_modal" style="margin-top: 200px">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">×</button>
+					<h4 class="modal-title">
+						确认活动参与名单
+						<span style="color: red; font-size: 10px;"> *此操作不会保存学生获得量化信息</span>
+					</h4>
+				</div>
+				<div class="modal-body">
+					<div class="modal-area">
+						<div class="text-center">
+							<span>已经准备好为 [</span>
+							<span class="selected-aname"></span>
+							<span>] 活动 [</span>
+							<span class="count-party-students"></span>
+							] 人确认名单
+						</div>
+						<div class="text-center">确认后将写入数据库，请仔细核对活动及对应名单。</div>
+						<div class="clearfix modal-center" style="width: 329px;">
+							<button class="modal-submit modal-width pull-left" id="modal-confirm-button">确认名单</button>
+							<button data-dismiss="modal" class="modal-submit modal-width pull-left">取消</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- finish_activity 确认出席并结束活动模态窗 -->
+	<div class="modal" id="finish_modal" style="margin-top: 200px">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">×</button>
+					<h4 class="modal-title">确认活动参与名单并结束活动</h4>
+				</div>
+				<div class="modal-body">
+					<div class="modal-area">
+						<div class="text-center">
+							<span>已经准备好为 [</span>
+							<span class="selected-aname"></span>
+							<span>] 活动 [</span>
+							<span class="count-party-students"></span>
+							] 人确认名单
+						</div>
+						<div class="text-center">并结束本次活动，为参与同学修改量化，结束后不可修改参与人员，量化信息。</div>
+						<div class="clearfix modal-center" style="width: 329px;">
+							<button class="modal-submit modal-width pull-left" id="modal-finish-button">确认名单并结束活动</button>
+							<button data-dismiss="modal" class="modal-submit modal-width pull-left">取消</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 通用模态窗 -->
+	<div class="modal" id="util-modal" style="margin-top: 200px">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">×</button>
+					<h4 class="modal-title" modal-title></h4>
+				</div>
+				<div class="modal-body" id="util-modal-ajax">正在加载...</div>
+			</div>
+		</div>
+	</div>
+	<!-- 通用中模态窗 -->
+	<div class="modal" id="mid-util-modal" style="margin-top: 50px">
+		<div class="modal-dialog mid-modal">
+			<div class="modal-content mid-modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">×</button>
+					<h4 class="modal-title" modal-title></h4>
+				</div>
+				<div class="modal-body mid-modal-body" id="mid-util-modal-ajax">正在加载...</div>
+			</div>
+		</div>
+	</div>
+	<!-- 通用大模态窗 -->
+	<div class="modal" id="big-util-modal">
+		<div class="modal-dialog big-modal">
+			<div class="modal-content big-modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">×</button>
+					<h4 class="modal-title" modal-title></h4>
+				</div>
+				<div class="modal-body big-modal-body" id="big-util-modal-ajax">正在加载...</div>
+			</div>
+		</div>
+	</div>
+	<!-- 通用alert模态窗 -->
+	<div class="modal" data-backdrop="static" data-keyboard="false" id="alert-modal" style="margin-top: 200px">
+		<div class="modal-dialog">
+			<div class="modal-content alert-modal-content" style="width: 600px;">
+				<div class="modal-header" style="padding: 10px 15px;">
+					<button type="button" class="close" data-dismiss="modal" id="alert-modal-closer">×</button>
+					<span style="font-size: 12px;">课堂辅助系统</span>
+				</div>
+				<div class="modal-body">
+					<div class="modal-area">
+						<div class="text-center">
+							<span class="sign glyphicon"></span>
+							<span class="alert-modal-text" style="position: relative; top: -6px;"></span>
+						</div>
+						<div id="loading">
+							<div id="loading-center">
+								<div id="loading-center-absolute">
+									<div class="object" id="object_four"></div>
+									<div class="object" id="object_three"></div>
+									<div class="object" id="object_two"></div>
+									<div class="object" id="object_one"></div>
+								</div>
+							</div>
+						</div>
+						<button class="modal-submit modal-center modal-width">好的</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 通用confirm模态窗 -->
+	<div class="modal" id="confirm-modal" style="margin-top: 200px">
+		<div class="modal-dialog">
+			<div class="modal-content alert-modal-content" style="width: 600px;">
+				<div class="modal-header" style="padding: 10px 15px;">
+					<button type="button" class="close" data-dismiss="modal">×</button>
+					<span style="font-size: 12px;">课堂辅助系统</span>
+				</div>
+				<div class="modal-body">
+					<div class="modal-area">
+						<div class="text-center confirm-modal-text"></div>
+						<div class="text-center" style="margin: 25px auto 0 auto">
+							<button data-dismiss="modal" class="modal-submit  submit modal-width">确定</button>
+							<button data-dismiss="modal" class="modal-submit cancel modal-width">取消</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.CbtCompTeamMapper">
+
+    <resultMap type="CbtCompTeam" id="CbtCompTeamResult">
+        <result property="teamId" column="team_id"/>
+        <result property="compId" column="comp_id"/>
+        <result property="status" column="status"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <association property="compInfo" column="comp_id" javaType="CbtCompInfo" resultMap="CbtCompInfoResult"/>
+    </resultMap>
+
+    <resultMap type="CbtCompInfo" id="CbtCompInfoResult">
+        <result property="compId" column="comp_id"/>
+        <result property="compName" column="comp_name"/>
+    </resultMap>
+
+
+    <sql id="selectCbtCompTeamVo">
+        select t.team_id, t.comp_id, t.status, t.create_by, t.create_time, c.comp_name
+        from cbt_comp_team t
+        left join cbt_comp_info c on t.comp_id = c.comp_id
+    </sql>
+
+    <select id="selectCbtCompTeamList" parameterType="CbtCompTeam" resultMap="CbtCompTeamResult">
+        <include refid="selectCbtCompTeamVo"/>
+        <where>
+            <if test="compId != null ">
+                and t.comp_id = #{compId}
+            </if>
+            <if test="status != null ">
+                and t.status = #{status}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectCbtCompTeamByUserIds" parameterType="String" resultMap="CbtCompTeamResult">
+        <include refid="selectCbtCompTeamVo"/>
+        where team_id in
+        <foreach item="teamId" collection="array" open="(" separator="," close=")">
+            #{teamId}
+        </foreach>
+    </select>
+
+    <select id="selectCbtCompTeamById" parameterType="Long" resultMap="CbtCompTeamResult">
+        <include refid="selectCbtCompTeamVo"/>
+        where t.team_id = #{teamId}
+    </select>
+
+    <insert id="insertCbtCompTeam" parameterType="CbtCompTeam" useGeneratedKeys="true">
+        <selectKey keyProperty="teamId" resultType="long" order="BEFORE">
+            SELECT seq_cbt_comp_team.NEXTVAL as teamId FROM DUAL
+        </selectKey>
+        insert into cbt_comp_team
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="teamId != null ">team_id,
+            </if>
+            <if test="compId != null ">comp_id,
+            </if>
+            <if test="status != null ">status,
+            </if>
+            <if test="createBy != null  and createBy != ''">create_by,
+            </if>
+            <if test="createTime != null ">create_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="teamId != null ">
+                #{teamId},
+            </if>
+            <if test="compId != null ">
+                #{compId},
+            </if>
+            <if test="status != null ">
+                #{status},
+            </if>
+            <if test="createBy != null  and createBy != ''">
+                #{createBy},
+            </if>
+            <if test="createTime != null ">
+                #{createTime},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateCbtCompTeam" parameterType="CbtCompTeam">
+        update cbt_comp_team
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="compId != null ">comp_id = #{compId},
+            </if>
+            <if test="status != null ">status = #{status},
+            </if>
+            <if test="createBy != null  and createBy != ''">create_by = #{createBy},
+            </if>
+            <if test="createTime != null ">create_time = #{createTime},
+            </if>
+
+        </trim>
+        where team_id = #{teamId}
+    </update>
+
+    <delete id="deleteCbtCompTeamById" parameterType="Long">
+        delete from cbt_comp_team where team_id = #{teamId}
+    </delete>
+
+    <delete id="deleteCbtCompTeamByIds" parameterType="String">
+        delete from cbt_comp_team where team_id in
+        <foreach item="teamId" collection="array" open="(" separator="," close=")">
+            #{teamId}
+        </foreach>
+    </delete>
+
+</mapper>

@@ -1,0 +1,51 @@
+<script type="text/javascript" th:src="@{/manager/js/studentCoursePage/student_course.js}"></script>
+<div class="real-contents all-contents">
+	<div class="clearfix">
+		<span class="rectangle left-min-margin"></span> <span class="title before-choose-text">请选择一个课程</span> <span
+			class="title before-choose-text glyphicon glyphicon-question-sign btn-warning"
+		></span> <span class="title after-choose-text">确认选择的课程无误并开始管理参与同学</span> <span
+			class="title after-choose-text glyphicon glyphicon-ok-sign btn-success"
+		></span> <span class="title after-choose-text" id="reselect-js">点我重新选择（重置本次修改）</span>
+	</div>
+	<div class="finish_onload_ajax">
+		<table class="show-table show-table-activities">
+			<tr class="show-tr">
+				<th>正在加载活动信息...</th>
+			</tr>
+		</table>
+	</div>
+	<div class="clearfix lllll">
+		<span class="rectangle left-min-margin"></span> <span class="title">添加参与学生</span>
+	</div>
+	<ul class="input-ul lllll">
+		<li class="input-li"><span class="input-title">输入信息：</span> <span class="input-border">
+				<input type="text" class="input-text input-sno" name="queryStudentValue"
+					placeholder="141403201 / 刘之帅"
+				/>
+			</span> <a class="input-border search-button left-margin" id="bysno">按学号查询</a> <a
+				class="input-border search-button" id="byname"
+			>按名字查询</a><a class="input-border search-button" id="packup">收起</a></li>
+	</ul>
+	<span class="info" lastclick></span>
+	<span class="info" lastinput></span>
+	<div class="query_students_ajax lllll"></div>
+	
+	<div class="clearfix">
+		<span class="rectangle left-min-margin"></span> <span class="title">参与学生名单</span>
+	</div>
+	<div class="activity_student_ajax">
+		<table class="show-table-commit control-name-width">
+			<tr class="show-tr">
+				<th>选择一个课程，在这里可以看到参与学生名单。</th>
+			</tr>
+		</table>
+	</div>
+	<ul class="input-ul lllll">
+		<li class="input-li">
+			<button class="submit" id="confirm">确认名单（可再次修改）</button>
+		</li>
+	</ul>
+	<form action="" class="info" id="finish-activity-form" method="post">
+		<input type="text" id="cid" name="cid" />
+	</form>
+</div>

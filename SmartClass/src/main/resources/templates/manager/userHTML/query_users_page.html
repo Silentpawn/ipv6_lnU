@@ -1,0 +1,33 @@
+<script type="text/javascript" src="js/queryUserPage/query_users.js"></script>
+<div class="function-contents">
+	<div class="real-contents all-contents">
+		<div class="clearfix">
+			<span class="rectangle"></span>
+			<span class="title">系统管理用户列表</span>
+		</div>
+		<ul class="input-ul">
+			<li class="input-li">
+				<span class="input-title">按角色查询：</span>
+				<button class="input-border group6 active" role="admin">管理员</button>
+				<button class="input-border group6" role="teacher">已注册教师</button>
+				<button class="input-border group6" role="registerTeacher">申请中的教师</button>
+			</li>
+		</ul>
+		<table class="show-table-student">
+			<tr><td>正在加载...</td></tr>
+		</table>
+		<ul class="input-ul">
+			<li class="input-li">
+				<button type="button" class="input-border-no-radius page-margin" id="firstPage">首页</button>
+				<button type="button" class="input-border-no-radius" id="previousPage">上一页</button>
+				<button type="button" class="input-border-no-radius" id="nextPage">下一页</button>
+				<button type="button" class="input-border-no-radius" id="lastPage">尾页</button> <span class="input-title middle-input-title" style="letter-spacing:2px">当前第 <span id="nowpagecopy">1</span> 页，共 <span id="totalpagescopy">1</span> 页，到第</span> <span
+					class="input-border-no-radius kkkkkk"
+				>
+					<input type="text" name="toPgae" class="input-text input-number" value="1" maxlength="3"/>
+				</span> <span class="input-title middle-input-title"> 页</span>
+				<button type="button" class="input-border-no-radius middle-input-title" id="toPage-button">确定</button>
+			</li>
+		</ul>
+	</div>
+</div>

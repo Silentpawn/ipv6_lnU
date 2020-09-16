@@ -1,0 +1,115 @@
+<table class="show-table-commit control-name-width party-table-js"  th:if="${list.size()!=0}">
+	<tr class="show-tr">
+		<th>序号</th>
+		<th>学院</th>
+		<th>年级</th>
+		<th>专业</th>
+		<th>学号</th>
+		<th>姓名</th>
+		<th>
+			<span class="left-margin">操作</span>
+		</th>
+	</tr>
+	<tr class="show-tr-min party-tr-js" th:each="student,st:${list}" th:object="${student}">
+		<td th:sid="*{id}" th:text="${st.count}"></td>
+		<td th:text="*{college}"></td>
+		<td th:text="*{grade}"></td>
+		<td th:text="*{profession}"></td>
+		<td th:text="*{sno}"></td>
+		<td th:text="*{name}"></td>
+		<td>
+			<input class="operate-checkbox left-margin" name="partycheckbox" type="checkbox">
+		</td>
+	</tr>
+</table>
+<table class="show-table-commit control-name-width party-table-js" th:if="${list.size()==0}">
+	<tr class="show-tr" tips>
+		<th>该课程还没有参与的学生。</th>
+	</tr>
+</table>
+<ul class="input-ul">
+	<li class="input-li">
+		<button class="input-border button-delete page-margin" id="deletes">删除所选</button>
+		<button class="input-border" id="all">全选</button>
+		<button class="input-border" id="inverse">反选</button>
+	</li>
+</ul>
+<script type="text/javascript">
+$(function(){
+
+	//全选.student-tr-js
+	$("#all").click(function(){
+		$("input[name='partycheckbox']").prop("checked",true);
+	});
+
+	//反选
+	$("#inverse").click(function(){ 
+
+		$("input[name='partycheckbox']").each(function(index,element){
+			if ($(this).is(":checked")) {	
+				$(this).prop("checked",false);
+			}                  
+			else {                  
+				$(this).prop("checked",true);
+			}       
+		});
+	});
+	
+	//将选中修改为0.3
+	$("#to03").click(function(){
+		$("input[name='partycheckbox']").each(function(index,element){
+			if ($(this).is(":checked")) {	
+				$(this).parents(".party-tr-js").children("td:nth-child(7)").text("0.3");
+			}
+		});
+	});
+	
+	$("#to06").click(function(){
+		$("input[name='partycheckbox']").each(function(index,element){
+			if ($(this).is(":checked")) {	
+				$(this).parents(".party-tr-js").children("td:nth-child(7)").text("0.6");
+			}
+		});
+	});
+	
+	//将选中修改为任意
+	$("#to").click(function(){
+		
+		var to_score = parseInt($("#to_score").val());
+		
+		if(to_score > 10 ) {
+			$("#to_score").val(9.9);
+		} else if(isNaN(to_score)) {
+			alert_text("warning","输入页码应为数字");
+		} else {
+			$("input[name='partycheckbox']").each(function(index,element){
+				if ($(this).is(":checked")) {	
+					$(this).parents(".party-tr-js").children("td:nth-child(7)").text($("#to_score").val());
+				}
+			});
+		}
+		
+	});
+	
+	//辅助input框点击获得焦点
+	$(".kkkkkk").click(function(){
+		$("#to_score").focus();
+	});
+	
+	//删除活动学生按钮
+	$("#deletes").click(function(){
+		
+		$("input[name='partycheckbox']").each(function(index,element){
+			if ($(this).is(":checked")) {	
+				$(this).parents(".party-tr-js").remove();
+				if($(".party-tr-js").length <= 0){
+					$(".party-table-js").html("<tr class='show-tr' tips><th>该活动还没有报名的学生。</th></tr>");
+				}
+			}
+		});
+	});
+	
+
+
+});
+</script>

@@ -1,0 +1,76 @@
+<script type="text/javascript" th:src="@{/manager/js/createCoursePage/create_course.js}"></script>
+<form id="form-hidden" method="post" th:action="@{/courseAPI/createCourse}">
+	<div class="real-contents">
+		<div class="clearfix">
+			<span class="rectangle"></span>
+			<span class="title">创建课程</span>
+		</div>
+		<ul class="input-ul">
+			<li class="input-li">
+				<span class="input-title">课程名称：</span>
+				<span class="input-border">
+					<input type="text" name="name" class="input-text" id="name" placeholder="面向对象编程" />
+				</span>
+			</li>
+			<li class="input-li">
+				<span class="input-title">课程时间：</span>
+				<span class="input-border">
+					<input name="starttime" type="text" class="input-text input-date js-time js-starttime" id="starttime" placeholder="2017-12-07 09:00" />
+				</span>
+				<span class="input-title middle-input-title">至</span>
+				<span class="input-border">
+					<input name="endtime" type="text" class="input-text input-date js-time js-endtime" id="endtime" placeholder="2017-12-09 22:30" />
+				</span>
+			</li>
+			<li class="input-li">
+				<span class="input-title">上课地点：</span>
+				<span class="input-border">
+					<input type="text" name="location" class="input-text input-date" id="location" placeholder="东配101" />
+				</span>
+			</li>
+		</ul>
+		<div class="clearfix" th:if="${session.teacher==null}">
+			<span class="rectangle"></span>
+			<span class="title">开课教师</span>
+		</div>
+		<ul class="input-ul" th:if="${session.teacher==null}">
+			<li class="input-li">
+				<span class="input-title">教师工号：</span>
+				<span class="input-border">
+					<input type="text" name="tno" class="input-text input-date" id="tno" placeholder="" />
+				</span>
+			</li>
+		</ul>
+		<input type="hidden" name="tno"  th:if="${session.teacher!=null}" th:value="${session.teacher!=null?session.teacher.tno:null}" />
+		<div class="clearfix">
+			<span class="rectangle"></span>
+			<span class="title">开课人数与课程学分</span>
+		</div>
+		<ul class="input-ul">
+			<li class="input-li">
+				<span class="input-title">开课人数：</span>
+				<span class="input-border">
+					<input type="text" name="studentNumber" class="input-text input-date" id="studentNumber" placeholder="5" />
+				</span>
+				<span class="input-title middle-input-title">人</span>
+			</li>
+			<li class="input-li">
+				<span class="input-title">课程学分：</span>
+				<span class="input-border">
+					<input type="text" name="credit" class="input-text input-date" id="credit" placeholder="2" />
+				</span>
+				<span class="input-title middle-input-title">分</span>
+			</li>
+		</ul>
+		<div class="clearfix">
+			<span class="rectangle"></span>
+			<span class="title">课程简介</span>
+		</div>
+		<ul class="input-ul" style="margin-bottom: 20px;">
+			<li class="input-li">
+				<textarea id="info" name="info" class="input-border" style="margin-left: 0px; outline: none; resize: none;" rows="10" cols="120"></textarea>
+			</li>
+		</ul>
+		<a class="submit" id="submit" style="display: block;">创建课程</a>
+	</div>
+</form>

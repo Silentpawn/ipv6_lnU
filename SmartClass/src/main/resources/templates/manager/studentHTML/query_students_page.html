@@ -1,0 +1,62 @@
+<script type="text/javascript" src="/SmartClass/manager/js/queryStudentPage/query_students.js"></script>
+<div class="function-contents">
+	<div class="real-contents all-contents">
+		<div class="clearfix">
+			<span class="rectangle"></span>
+			<span class="title">浏览学生信息</span>
+		</div>
+		<ul class="input-ul">
+			<form id="ajax">
+				<li class="input-li"><span class="input-title">选择查询范围：</span></li>
+				<li class="input-li">
+					<button type="button" class="input-border page-margin active" group="1" grade="all">所有年级</button>
+					<button type="button" class="input-border" group="1" grade="14">14</button>
+					<button type="button" class="input-border" group="2" grade="15">15</button>
+					<button type="button" class="input-border" group="3" grade="16">16</button>
+					<button type="button" class="input-border" group="4" grade="17">17</button> <span class="space"></span>
+					<button type="button" class="input-border group group1 active" profession="all">全部专业</button>
+					<button type="button" class="input-border group group1" profession="软件工程">软件</button>
+					<button type="button" class="input-border group group1" profession="计算机科学与技术">硬件</button>
+					<button type="button" class="input-border group group1" profession="信息管理与信息系统">信管</button>
+					<button type="button" class="input-border group group1" profession="电子信息科学与技术">电信</button>
+					<button type="button" class="input-border group group1" profession="通信工程">通信</button>
+					<button type="button" class="input-border group group2" profession="all">全部专业</button>
+					<button type="button" class="input-border group group2" profession="软件工程">软件</button>
+					<button type="button" class="input-border group group2" profession="计算机科学与技术">硬件</button>
+					<button type="button" class="input-border group group2" profession="信息管理与信息系统">信管</button>
+					<button type="button" class="input-border group group2" profession="电子信息科学与技术">电信</button>
+					<button type="button" class="input-border group group2" profession="通信工程">通信</button>
+					<button type="button" class="input-border group group3" profession="all">全部专业</button>
+					<button type="button" class="input-border group group3" profession="软件工程">软件</button>
+					<button type="button" class="input-border group group3" profession="计算机科学与技术">硬件</button>
+					<button type="button" class="input-border group group3" profession="信息管理与信息系统">信管</button>
+					<button type="button" class="input-border group group3" profession="电子信息科学与技术">电信</button>
+					<button type="button" class="input-border group group3" profession="通信工程">通信</button>
+					<button type="button" class="input-border group group4" profession="all">全部专业</button>
+					<button type="button" class="input-border group group4" profession="计算机类">计算机类</button>
+					<button type="button" class="input-border group group4" profession="电子信息类">电子信息类</button>
+					<button type="button" class="input-border group group4" profession="信息管理类">信息管理类</button> <span class="space"></span>
+				</li>
+			</form>
+		</ul>
+		<table class="show-table-student" id="ajax_result">
+			<tr class="show-tr">
+				<td>正在加载学生信息...</td>
+			</tr>
+		</table>
+		<ul class="input-ul">
+			<li class="input-li">
+				<button type="button" class="input-border-no-radius page-margin" id="firstPage">首页</button>
+				<button type="button" class="input-border-no-radius" id="previousPage">上一页</button>
+				<button type="button" class="input-border-no-radius" id="nextPage">下一页</button>
+				<button type="button" class="input-border-no-radius" id="lastPage">尾页</button> <span class="input-title middle-input-title" style="letter-spacing:2px">当前第 <span id="nowpagecopy">1</span> 页，共 <span id="totalpagescopy">1</span> 页，到第</span> <span
+					class="input-border-no-radius kkkkkk"
+				>
+					<input type="text" name="toPgae" class="input-text input-number" value="1" maxlength="3"/>
+				</span> <span class="input-title middle-input-title"> 页</span>
+				<button type="button" class="input-border-no-radius middle-input-title" id="toPage-button">确定</button>
+			</li>
+		</ul>
+	</div>
+</div>
+

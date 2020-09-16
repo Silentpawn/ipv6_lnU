@@ -1,0 +1,168 @@
+/** ---------------------- 模态窗样式 --------------------- */
+
+.modal-title {
+	font-size: 15px;
+	line-height: 20px;
+}
+
+.modal-body {
+	font-size: 12px;
+	overflow: auto;
+}
+
+.modal-body .modal-area {
+	margin:15px auto;
+	width: 450px;
+}
+
+.modal-body .modal-date {	
+	border: none;
+	outline: none;
+	width: 300px;
+}
+
+.modal-body .modal-border {
+	padding:8px;
+	border: 1px solid #dedede;
+	margin-left: 10px;
+	border-radius: 4px;
+}
+
+.modal-body .modal-input {
+	border: none;
+    outline: none;
+    width: 300px;
+
+}
+
+.modal-body .modal-text-old {
+	line-height: 32px;
+}
+
+.modal-body .modal-submit {
+	padding:8px;
+	border: 1px solid #ff3a3a;
+	margin-left: 10px;
+	border-radius: 4px;
+	color: #ff3a3a;
+	width: 100px;
+}
+
+.modal-body .big-modal-submit {
+	width: 300px;;
+	margin-left:84px;
+}
+
+.modal-body .modal-width {
+	width: 150px;
+}
+
+.modal-body .modal-center {
+	margin:25px auto 0 auto;
+	display: block;
+}
+
+.modal-body .only-center {
+	margin:0 auto;
+	display:bolck;
+}
+
+.modal .big-modal {
+	width:80%;
+}
+
+.modal .mid-modal {
+	width:800px;
+}
+
+.modal .info {
+	display:none;
+}
+
+.modal-body .input-ul .short {
+	width:180px;
+}
+
+.modal-body input:disabled {
+	background-color: #fff;
+	color:#aaa;
+}
+
+
+/*-------- copy样式 ---------*/
+
+.modal-body .input-ul {
+	list-style: none;
+	margin: 15px 0 15px 10px;
+	
+}
+
+.modal-body .input-li {
+	margin:15px 0;
+}
+
+.modal-body .input-title {
+	line-height: 32px;
+}
+
+.modal-body .input-border {
+	padding:8px;
+	border: 1px solid #dedede;
+	margin-left: 10px;
+	border-radius: 4px;
+}
+
+.modal-body .middle-input-title {
+	margin-left: 10px;
+}
+
+.modal-body .input-text {	
+	border: none;
+	outline: none;
+	width: 500px;
+}
+
+.modal-body .input-date,.function-contents .input-sno {
+	width: 130px;
+}
+
+.modal-body .title {
+	line-height: 12px;
+	float: left;
+	margin-left: 10px;
+}
+
+.modal-body .rectangle {
+	background-color: #ff3a3a;
+	display: block;
+	float: left;
+	width: 30px;
+	height: 12px;
+}
+
+.modal-body .input-textarea {
+	outline: none; 
+	resize: none;
+}
+
+.modal-body .position-title {
+	vertical-align:top;
+}
+
+.modal-body .active {
+	color: #ff3a3a;
+	border-color: #ff3a3a;
+}
+
+.modal-body .input-number {
+	width:20px;
+}
+
+.modal-body .input-border:disabled {
+	color: #dedede;
+}
+
+.modal-body .bold {
+	font-weight: bold;
+}
+

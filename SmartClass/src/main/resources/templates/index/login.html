@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+<title>登录</title>
+<link rel="stylesheet" type="text/css" href="/SmartClass/index/bootstrap-3.3.7-dist/css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="/SmartClass/index/css/index.css">
+<link rel="stylesheet" type="text/css" href="/SmartClass/index/css/preload.css">
+<script type="text/javascript" src="/SmartClass/index/js/jquery-3.2.1.js"></script>
+<script type="text/javascript" src="/SmartClass/index/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+<script type="text/javascript" src="/SmartClass/index/js/loginPage/login.js"></script>
+<script type="text/javascript" src="/SmartClass/index/js/loginPage/loginService.js"></script>
+<script type="text/javascript" src="/SmartClass/util.js"></script>
+<style type="text/css">
+.loader {
+	position: absolute;
+	background: white;
+	z-index: 2000;
+	height: 100%;
+	width: 100%;
+	background-color: #eee;
+	top: 0;
+	left: 0;
+	text-align: center;
+}
+
+.loader__info {
+	font-family: "Microsoft YaHei" ! important;
+	font-size: 18px;
+	text-align: center;
+	color: #333;
+}
+
+.loader-logo {
+	width: 100px;
+	height: 100px;
+	margin: 15% auto 0px auto;
+	background-image: url(/SmartClass/index/images/logo_black.png);
+	background-size: cover;
+}
+
+.background-color{
+	background-color: #ddd;
+}
+</style>
+</head>
+<body>
+
+	
+	<!-- 登录表格  -->
+	<div class="wrap" id="wrap">
+		<div class="login-area clearfix">
+			<div class="black-area clearfix">
+				<div class="clearfix">
+					<div class="pull-left" style="margin-bottom: 10px;">
+						<span class="logo-text">课堂辅助系统</span>
+					</div>
+				</div>
+				<form id="login-form" method="post" action="/SmartClass/login/login">
+					<input type="text" class="in-middle-no-black middle-input " name="name" placeholder="用户名/教工号/学号" />
+					<div style="position: relative;">
+						<input type="password" class="in-middle-no-black middle-input" name="password" placeholder="在此处输入密码" />
+						<span id="posswordeye" class="glyphicon glyphicon-eye-close"></span>
+					</div>
+
+				</form>
+				<div class="error-msg" style="display: none;"></div>
+				<button class="in-middle middle-button pull-right" id="login-button">登录</button>
+				<div class="pull-right middle-text clearfix">
+					<a class="a-eee" id="forget-password-btn"> <span class="text-bottom">注册账户</span>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="background" id="background">
+		<img class="background-img" id="background-img" src="/SmartClass/index/images/background.jpg">
+	</div>
+	<footer class="footer">
+		<div>Copyright © 2017 - 2018 Personal. All Rights Reserved.</div>
+		<div>
+			版权所有 <a class="a-none" href="http://www.miitbeian.gov.cn/">辽ICP备17014284号</a>
+		</div>
+	</footer>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('通知公告详情')"/>
+</head>
+<body class="gray-bg">
+<div class="row">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-content">
+                <h2 align="center">
+                    [[${notice.noticeTitle}]]<br/>
+                </h2>
+                <div id="content">
+                    [[${notice.noticeContent}]]
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<th:block th:include="include :: footer"/>
+<th:block th:include="include :: summernote-js"/>
+<script>
+    $(function () {
+        document.getElementById("content").innerHTML = document.getElementById("content").innerText;
+    });
+</script>
+</body>
+</html>

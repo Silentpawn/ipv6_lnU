@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('团队成员列表')"/>
+</head>
+<div class="container-div">
+    <div class="row">
+        <div class="col-sm-12 search-collapse" hidden>
+            <form id="formId">
+                <div class="select-list">
+                    <ul>
+                        <li>
+                            <label>团队ID：</label>
+                            <input type="text" name="teamId" id="teamId" th:value="${teamId}"/>
+                        </li>
+                        <li>
+                            <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i
+                                    class="fa fa-search"></i>&nbsp;搜索</a>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+
+        <div class="btn-group-sm" id="toolbar" role="group">
+            <a class="btn btn-success" onclick="add()" shiro:hasPermission="system:comp_team_mem:add">
+                <i class="fa fa-plus"></i> 添加
+            </a>
+            <a class="btn btn-danger" onclick="exitTeam()" shiro:hasPermission="system:comp_team_mem:exitTeam">
+                <i class="fa fa-remove"></i> 退出队伍
+            </a>
+            <a class="btn btn-warning" onclick="$.table.exportExcel()"
+               shiro:hasPermission="system:comp_team_mem:export">
+                <i class="fa fa-download"></i> 导出
+            </a>
+        </div>
+        <div class="col-sm-12 select-table table-striped">
+            <table id="bootstrap-table"></table>
+        </div>
+    </div>
+</div>
+<th:block th:include="include :: footer"/>
+<script th:inline="javascript">
+    var editFlag = [[${@permission.hasPermi('system:comp_team_mem:edit')}]];
+    var removeFlag = [[${@permission.hasPermi('system:comp_team_mem:remove')}]];
+    var prefix = ctx + "system/comp_team_mem";
+
+
+    $(function () {
+        var options = {
+            url: prefix + "/list",
+            createUrl: prefix + "/add",
+            updateUrl: prefix + "/edit/{id}",
+            removeUrl: prefix + "/remove",
+            exportUrl: prefix + "/export",
+            modalName: "团队成员",
+            method: 'get',
+            columns: [{
+                checkbox: true
+            },
+                {
+                    filed: 'tuId',
+                    sortable: true,
+                    visible: false
+                },
+                {
+                    field: 'teamId',
+                    title: '团队ID'
+                },
+                {
+                    field: 'sysUser.loginName',
+                    title: '学号'
+                },
+                {
+                    field: 'sysUser.userName',
+                    title: '姓名'
+                },
+                {
+                    field: 'sysUser.dept.deptName',
+                    title: '专业'
+                },
+                {
+                    field: 'sysUser.phonenumber',
+                    title: '联系方式'
+                }, {
+                    field: 'sysUser.email',
+                    title: '电子邮件'
+                },
+                {
+                    title: '操作',
+                    align: 'center',
+                    formatter: function (value, row, index) {
+                        var actions = [];
+                        actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.tuId + '\')"><i class="fa fa-edit"></i>评价</a> ');
+                        return actions.join('');
+                    }
+                }]
+        };
+        $.table.init(options);
+    });
+    var teamId = [[${teamId}]]
+    function add() {
+        var url = prefix + '/add/' + teamId;
+        $.modal.open("新增成员", url);
+    }
+    function exitTeam() {
+        var url = prefix + '/exitTeam/' + teamId;
+        $.operate.post(url);
+        $.modal.parentTab("竞赛属性","/system/comp_info");
+    }
+</script>
+
+</body>
+</html>

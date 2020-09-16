@@ -1,0 +1,57 @@
+
+<script type="text/javascript" src="/SmartClass/manager/js/queryCoursePage/edit_course.js"></script>
+<form id="form-hidden" action="/SmartClass/courseAPI/editCourse" method="post" th:object="${course}">
+<ul class="input-ul" style="margin-top: -10px;" >
+<input type="hidden"  name="id" th:value="*{id}" />
+	<li class="input-li">
+		<span class="input-title">课程名称：</span>
+		<span class="input-border">
+			<input type="text" class="input-text" name="name" id="name" placeholder="" th:value="*{name}" />
+		</span>
+	</li>
+	<li class="input-li">
+		<span class="input-title">开课时间：</span>
+		<span class="input-border">
+			<input type="text" class="input-text input-date js-time js-starttime" name="starttime" id="starttime" placeholder="2017-12-07 09:00" th:value="*{starttime}" />
+		</span>
+		<span class="input-title middle-input-title">至</span>
+		<span class="input-border">
+			<input type="text" class="input-text input-date js-time js-endtime" name="endtime" id="endtime" placeholder="2017-12-09 22:30" th:value="*{endtime}" />
+		</span>
+	</li>
+	<li class="input-li">
+				<span class="input-title">上课地点：</span>
+				<span class="input-border">
+					<input type="text" class="input-text input-date" name="location" id="location" placeholder="东配101" th:value="*{location}" />
+				</span>
+			</li>
+		</ul>
+		<ul class="input-ul">
+			<li class="input-li">
+				<span class="input-title">开课人数：</span>
+				<span class="input-border">
+					<input type="text" class="input-text input-date" name="studentNumber" id="studentNumber" placeholder="5" th:value="*{studentNumber}"/>
+				</span>
+				<span class="input-title middle-input-title">人</span>
+			</li>
+			<li class="input-li">
+				<span class="input-title">课程学分：</span>
+				<span class="input-border">
+					<input type="text" class="input-text input-date" name="credit" id="credit" placeholder="2" th:value="*{credit}" />
+				</span>
+				<span class="input-title middle-input-title">分</span>
+			</li>
+</ul>
+
+<ul class="input-ul" style="margin-bottom: 20px;">
+	<li class="input-li">
+		<span class="input-title position-title">活动简介：</span>
+		<span>
+			<textarea id="info" class="input-border input-textarea" rows="10" cols="120" name="info" th:text="*{info}"></textarea>
+		</span>
+	</li>
+</ul>
+
+	
+</form>
+<button .data-dismiss="modal" class="modal-submit big-modal-submit" id="submit">确认修改课程信息</button>

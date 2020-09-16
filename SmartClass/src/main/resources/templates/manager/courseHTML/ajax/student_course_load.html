@@ -1,0 +1,30 @@
+
+	<table class="show-table show-table-activities">
+		<tr class="show-tr">
+			<th>序号</th>
+			<th>课程名称</th>
+			<th>开课时间</th>
+			<th>结束时间</th>
+			<th>开课教师</th>
+			<th>参与人数</th>
+			<th>上课地点</th>
+			<th>课程学分</th>
+		</tr>
+		<tr class="show-tr show-hover activity-js" th:each="course,st:${list}" th:cid="${course.id}">
+			<td th:aid="${course.id}" th:text="${st.count}"></td>
+			<td th:aname="${course.name}" th:text="${course.name}"></td>
+			<td th:text="${course.starttime}"></td>
+			<td th:text="${course.endtime}"></td>
+			<td th:text="${course.teacher.name}"></td>
+			<td th:text="${course.students.size()} + '/' +${course.studentNumber}"></td>
+			<td th:text="${course.location}"></td>
+			<td th:text="${course.credit}"></td>
+		</tr>
+	</table>
+
+
+	<table class="show-table show-table-activities" th:if="${list.size()==0}">
+		<tr class="show-tr">
+			<th>没有您权限内的可管理的课程。</th>
+		</tr>
+	</table>

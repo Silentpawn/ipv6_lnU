@@ -1,0 +1,35 @@
+<tr class="show-tr">
+	<th>序号</th>
+	<th>学院</th>
+	<th>专业</th>
+	<th>姓名</th>
+	<th>性别</th>
+	<th>教工号</th>
+	<th>
+		<span class="left-margin">操作</span>
+	</th>
+</tr>
+<tr class="show-tr-min show-hover" th:each="teacher,st:${teachers}">
+	<td th:id="${teacher.id}" th:text="${st.count}"></td>
+	<td th:text="${teacher.college}"></td>
+	<td th:text="${teacher.profession}"></td>
+	<td th:text="${teacher.name}"></td>
+	<td th:text="${teacher.sex}"></td>
+	<td th:text="${teacher.tno}"></td>
+	<td>
+		<span th:unless="${teacher.status=='未通过'}" class="glyphicon glyphicon-pencil left-margin operate operate-min" onClick="edit_user(this);"></span>
+		<span th:if="${teacher.status=='未通过'}" class="glyphicon glyphicon-ok left-margin operate operate-min" onClick="accept_application(this);"></span>
+		<span class="glyphicon glyphicon-trash left-margin operate operate-min" onClick="delete_user(this);"></span>
+	</td>
+</tr>
+<tr class="show-tr" th:if="${teachers.size()==0}">
+	<th>数据库中暂无符合条件的用户。</th>
+</tr>
+<tr class="info">
+	<td>
+		<span id="nowPage" th:text="${pageVO.nowPage}">
+		</span>
+		<span id="totalPages" th:text="${pageVO.totalPages}">
+		</span>
+	</td>
+</tr>

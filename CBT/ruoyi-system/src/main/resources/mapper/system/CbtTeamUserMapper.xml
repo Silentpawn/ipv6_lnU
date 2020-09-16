@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.CbtTeamUserMapper">
+
+    <resultMap type="CbtTeamUser" id="CbtTeamUserResult">
+        <result property="tuId" column="tu_id"/>
+        <result property="teamId" column="team_id"/>
+        <result property="userId" column="user_id"/>
+        <result property="ela" column="ela"/>
+        <result property="eca" column="eca"/>
+        <association property="sysUser" column="user_id" javaType="SysUser" resultMap="SysUserResult"/>
+        <association property="cbtCompTeam" column="team_id" javaType="CbtCompTeam" resultMap="CbtCompTeamResult"/>
+    </resultMap>
+
+    <resultMap type="CbtCompTeam" id="CbtCompTeamResult">
+        <result property="teamId" column="team_id"/>
+        <result property="compId" column="comp_id"/>
+        <result property="status" column="status"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+
+
+    <resultMap type="SysUser" id="SysUserResult">
+        <id property="userId" column="user_id"/>
+        <result property="deptId" column="dept_id"/>
+        <result property="loginName" column="login_name"/>
+        <result property="userName" column="user_name"/>
+        <result property="email" column="email"/>
+        <result property="phonenumber" column="phonenumber"/>
+        <association property="dept" column="dept_id" javaType="SysDept" resultMap="deptResult"/>
+    </resultMap>
+
+    <resultMap id="deptResult" type="SysDept">
+        <id property="deptId" column="dept_id"/>
+        <result property="parentId" column="parent_id"/>
+        <result property="deptName" column="dept_name"/>
+    </resultMap>
+
+    <sql id="selectCbtTeamUserVo">
+        select tu.tu_id, tu.team_id, tu.user_id, tu.ela, tu.eca, u.user_name, u.login_name, u.email, u.phonenumber,
+                d.dept_name, ct.comp_id
+        from cbt_team_user tu
+        left join sys_user u on u.user_id = tu.user_id
+        left join sys_dept d on u.dept_id = d.dept_id
+        left join cbt_comp_team ct on ct.team_id = tu.team_id
+    </sql>
+
+    <select id="selectCbtTeamUserList" parameterType="CbtTeamUser" resultMap="CbtTeamUserResult">
+        <include refid="selectCbtTeamUserVo"/>
+        <where>
+            <if test="tuId != null ">
+                and tu.tu_id = #{tuId}
+            </if>
+            <if test="teamId != null ">
+                and tu.team_id = #{teamId}
+            </if>
+            <if test="userId != null ">
+                and tu.user_id = #{userId}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectCbtTeamUserById" parameterType="Long" resultMap="CbtTeamUserResult">
+        <include refid="selectCbtTeamUserVo"/>
+        where tu.tu_id = #{tuId}
+    </select>
+
+    <select id="countMemById" parameterType="Long" resultType="Integer">
+        select count(*) from cbt_team_user where team_id = #{teamId}
+    </select>
+
+    <select id="selectMemByCompId" parameterType="Long" resultMap="CbtTeamUserResult">
+--         select tu.user_id
+--         from cbt_team_user tu
+--         left join cbt_comp_team ct on ct.team_id = tu.team_id
+        <include refid="selectCbtTeamUserVo"/>
+        where ct.comp_id = #{compId}
+    </select>
+
+    <insert id="insertCbtTeamUser" parameterType="CbtTeamUser">
+        <selectKey keyProperty="tuId" resultType="long" order="BEFORE">
+            SELECT seq_cbt_team_user.NEXTVAL as tuId FROM DUAL
+        </selectKey>
+        insert into cbt_team_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="teamId != null ">team_id,
+            </if>
+            <if test="userId != null ">user_id,
+            </if>
+            <if test="ela != null ">ela,
+            </if>
+            <if test="eca != null ">eca,
+            </if>
+            <if test="tuId != null ">tu_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="teamId != null ">
+                #{teamId},
+            </if>
+            <if test="userId != null ">
+                #{userId},
+            </if>
+            <if test="ela != null ">
+                #{ela},
+            </if>
+            <if test="eca != null ">
+                #{eca},
+            </if>
+            <if test="tuId != null ">
+                #{tuId},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateCbtTeamUser" parameterType="CbtTeamUser">
+        update cbt_team_user
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="ela != null ">ela = #{ela},
+            </if>
+            <if test="eca != null ">eca = #{eca},
+            </if>
+        </trim>
+        where team_id = #{teamId}
+    </update>
+
+    <delete id="deleteCbtTeamUserById" parameterType="Long">
+        delete from cbt_team_user where tu_id = #{tuId}
+    </delete>
+
+    <delete id="deleteCbtTeamUserByIds" parameterType="String">
+        delete from cbt_team_user where tu_id in
+        <foreach item="tuId" collection="array" open="(" separator="," close=")">
+            #{tuId}
+        </foreach>
+    </delete>
+
+</mapper>

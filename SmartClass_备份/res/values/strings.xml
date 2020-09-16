@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="hello">Hello World, Login!</string>
-    <string name="app_name">辽宁大学OAS</string>
-    <string name="acc">用户名</string>
-    <string name="pwd">密码</string>
-</resources>

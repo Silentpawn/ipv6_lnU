@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('竞赛团队列表')"/>
+</head>
+<body class="gray-bg">
+<div class="container-div">
+    <div class="row">
+        <div class="btn-group-sm" id="toolbar" role="group">
+            <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="system:comp_team:export">
+                <i class="fa fa-download"></i> 导出
+            </a>
+        </div>
+        <div class="col-sm-12 select-table table-striped">
+            <table id="bootstrap-table"></table>
+        </div>
+    </div>
+</div>
+<th:block th:include="include :: footer"/>
+<script th:inline="javascript">
+    var editFlag = [[${@permission.hasPermi('system:comp_team:edit')}]];
+    var statusDatas = [[${@dict.getType('comp_team_status')}]];
+    var prefix = ctx + "system/comp_team";
+
+    $(function () {
+        var options = {
+            url: prefix + "/list1",
+            createUrl: prefix + "/add",
+            updateUrl: prefix + "/edit/{id}",
+            removeUrl: prefix + "/remove",
+            exportUrl: prefix + "/export",
+            modalName: "竞赛团队",
+            sortable: true,
+            sortName: "createTime",
+            columns: [{
+                checkbox: true
+            },
+                {
+                    field: 'teamId',
+                    title: '团队ID',
+                },
+                {
+                    field: 'compInfo.compName',
+                    title: '竞赛名称',
+                },
+                {
+                    field: 'compId',
+                    title: '竞赛ID',
+                    visible: false
+                },
+                {
+                    field: 'createTime',
+                    title: '创建时间',
+                },
+                {
+                    field: 'createBy',
+                    title: '创建者',
+                },
+                {
+                    field: 'status',
+                    title: '团队状态',
+                    formatter: function (value, row, index) {
+                        return $.table.selectDictLabel(statusDatas, value);
+                    }
+                },
+                {
+                    title: '操作',
+                    align: 'center',
+                    formatter: function (value, row, index) {
+                        var actions = [];
+                        actions.push('<a class="btn btn-success btn-xs ' + editFlag +
+                            '" href="javascript:void(0)" onclick="detail(\'' + row.teamId +
+                            '\')"><i class="fa fa-edit"></i>查看成员</a> ');
+                        return actions.join('');
+                    }
+                }]
+        };
+        $.table.init(options);
+    });
+
+    /*团队成员-详细*/
+    function detail(teamId) {
+        var url = prefix + '/listTeamUserByStu/' + teamId;
+        $.modal.openTab("团队成员", url);
+    }
+</script>
+</body>
+</html>

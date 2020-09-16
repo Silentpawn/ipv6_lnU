@@ -1,0 +1,5 @@
+INSERT INTO "NOTIFICATION"("NID", "TITLE", "CONTENT", "PUBLICTIME", "PUBLISHER") VALUES ('2', '宋宝燕老师数据库原理实验课暂停一次', '宋宝燕老师数据库原理实验课暂停一次，缺失课程下周三补上，特此通知', TO_DATE('2020-08-20 13:30:59', 'SYYYY-MM-DD HH24:MI:SS'), '管理员');
+INSERT INTO "NOTIFICATION"("NID", "TITLE", "CONTENT", "PUBLICTIME", "PUBLISHER") VALUES ('1', '冯东晖老师嵌入式系统实验课暂停一次', '冯东晖老师嵌入式系统实验课暂停一次，缺失课程下周四补上，特此通知', TO_DATE('2020-08-20 13:00:59', 'SYYYY-MM-DD HH24:MI:SS'), '管理员');
+INSERT INTO "NOTIFICATION"("NID", "TITLE", "CONTENT", "PUBLICTIME", "PUBLISHER") VALUES ('3', '薛军老师面向对象程序设计实验课暂停一次', '薛军老师面向对象程序设计实验课暂停一次，缺失课程下周四补上，特此通知', TO_DATE('2020-08-20 15:30:59', 'SYYYY-MM-DD HH24:MI:SS'), '管理员');
+INSERT INTO "NOTIFICATION"("NID", "TITLE", "CONTENT", "PUBLICTIME", "PUBLISHER") VALUES ('622', '王涛老师UML设计模式周四上午课程暂停一次', '软件工程2班王涛老师UML设计模式周四上午课程暂停一次，预计下周二下午补课', TO_DATE('2020-08-20 11:22:57', 'SYYYY-MM-DD HH24:MI:SS'), '管理员');
+INSERT INTO "NOTIFICATION"("NID", "TITLE", "CONTENT", "PUBLICTIME", "PUBLISHER") VALUES ('621', '岳承君老师计算机系统结构课程周三下午课程暂停一次', '软件工程3班周三下午岳承君老师计算机系统结构课程课程暂停一次，具体上课时间暂定', TO_DATE('2020-08-20 11:20:19', 'SYYYY-MM-DD HH24:MI:SS'), '管理员');

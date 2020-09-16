@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.CbtCompInfoMapper">
+
+    <resultMap type="CbtCompInfo" id="CbtCompInfoResult">
+        <result property="compId" column="comp_id"/>
+        <result property="compName" column="comp_name"/>
+        <result property="startTime" column="start_time"/>
+        <result property="endTime" column="end_time"/>
+        <result property="pf" column="pf"/>
+        <result property="cl" column="cl"/>
+        <result property="ta" column="ta"/>
+        <result property="pa" column="pa"/>
+        <result property="ce" column="ce"/>
+        <result property="re" column="re"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="memNum" column="mem_num"/>
+    </resultMap>
+
+    <sql id="selectCbtCompInfoVo">
+        select comp_id, comp_name, start_time, end_time, pf, cl, ta, pa, ce, re, create_by, create_time, update_by, update_time, mem_num from cbt_comp_info
+    </sql>
+
+    <select id="selectCbtCompInfoList" parameterType="CbtCompInfo" resultMap="CbtCompInfoResult">
+        <include refid="selectCbtCompInfoVo"/>
+        <where>
+            <if test="compName != null  and compName != ''">
+                and comp_name like concat(concat('%', #{compName}), '%')
+            </if>
+            <if test="startTime != null ">
+                and start_time = #{startTime}
+            </if>
+            <if test="endTime != null ">
+                and end_time = #{endTime}
+            </if>
+            <if test="pf != null ">
+                and pf = #{pf}
+            </if>
+            <if test="cl != null ">
+                and cl = #{cl}
+            </if>
+            <if test="ta != null ">
+                and ta = #{ta}
+            </if>
+            <if test="pa != null ">
+                and pa = #{pa}
+            </if>
+            <if test="ce != null ">
+                and ce = #{ce}
+            </if>
+            <if test="re != null ">
+                and re = #{re}
+            </if>
+            <if test="memNum != null ">
+                and mem_num = #{memNum}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectCbtCompInfoById" parameterType="Long" resultMap="CbtCompInfoResult">
+        <include refid="selectCbtCompInfoVo"/>
+        where comp_id = #{compId}
+    </select>
+
+    <insert id="insertCbtCompInfo" parameterType="CbtCompInfo">
+        <selectKey keyProperty="compId" resultType="long" order="BEFORE">
+            SELECT seq_cbt_comp_info.NEXTVAL as compId FROM DUAL
+        </selectKey>
+        insert into cbt_comp_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="compId != null ">comp_id,
+            </if>
+            <if test="compName != null  and compName != ''">comp_name,
+            </if>
+            <if test="startTime != null ">start_time,
+            </if>
+            <if test="endTime != null ">end_time,
+            </if>
+            <if test="pf != null ">pf,
+            </if>
+            <if test="cl != null ">cl,
+            </if>
+            <if test="ta != null ">ta,
+            </if>
+            <if test="pa != null ">pa,
+            </if>
+            <if test="ce != null ">ce,
+            </if>
+            <if test="re != null ">re,
+            </if>
+            <if test="createBy != null  and createBy != ''">create_by,
+            </if>
+            <if test="createTime != null ">create_time,
+            </if>
+            <if test="updateBy != null  and updateBy != ''">update_by,
+            </if>
+            <if test="updateTime != null ">update_time,
+            </if>
+            <if test="memNum != null ">mem_num,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="compId != null ">
+                #{compId},
+            </if>
+            <if test="compName != null  and compName != ''">
+                #{compName},
+            </if>
+            <if test="startTime != null ">
+                #{startTime},
+            </if>
+            <if test="endTime != null ">
+                #{endTime},
+            </if>
+            <if test="pf != null ">
+                #{pf},
+            </if>
+            <if test="cl != null ">
+                #{cl},
+            </if>
+            <if test="ta != null ">
+                #{ta},
+            </if>
+            <if test="pa != null ">
+                #{pa},
+            </if>
+            <if test="ce != null ">
+                #{ce},
+            </if>
+            <if test="re != null ">
+                #{re},
+            </if>
+            <if test="createBy != null  and createBy != ''">
+                #{createBy},
+            </if>
+            <if test="createTime != null ">
+                #{createTime},
+            </if>
+            <if test="updateBy != null  and updateBy != ''">
+                #{updateBy},
+            </if>
+            <if test="updateTime != null ">
+                #{updateTime},
+            </if>
+            <if test="memNum != null ">
+                #{memNum},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateCbtCompInfo" parameterType="CbtCompInfo">
+        update cbt_comp_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="compName != null  and compName != ''">comp_name = #{compName},
+            </if>
+            <if test="startTime != null ">start_time = #{startTime},
+            </if>
+            <if test="endTime != null ">end_time = #{endTime},
+            </if>
+            <if test="pf != null ">pf = #{pf},
+            </if>
+            <if test="cl != null ">cl = #{cl},
+            </if>
+            <if test="ta != null ">ta = #{ta},
+            </if>
+            <if test="pa != null ">pa = #{pa},
+            </if>
+            <if test="ce != null ">ce = #{ce},
+            </if>
+            <if test="re != null ">re = #{re},
+            </if>
+            <if test="createBy != null  and createBy != ''">create_by = #{createBy},
+            </if>
+            <if test="createTime != null ">create_time = #{createTime},
+            </if>
+            <if test="updateBy != null  and updateBy != ''">update_by = #{updateBy},
+            </if>
+            <if test="updateTime != null ">update_time = #{updateTime},
+            </if>
+            <if test="memNum != null ">mem_num = #{memNum},
+            </if>
+        </trim>
+        where comp_id = #{compId}
+    </update>
+
+    <delete id="deleteCbtCompInfoById" parameterType="Long">
+        delete from cbt_comp_info where comp_id = #{compId}
+    </delete>
+
+    <delete id="deleteCbtCompInfoByIds" parameterType="String">
+        delete from cbt_comp_info where comp_id in
+        <foreach item="compId" collection="array" open="(" separator="," close=")">
+            #{compId}
+        </foreach>
+    </delete>
+
+</mapper>

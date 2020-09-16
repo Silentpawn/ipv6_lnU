@@ -1,0 +1,32 @@
+<tr class="show-tr">
+	<th>序号</th>
+	<th>用户名</th>
+	<th>QQ</th>
+	<th>电话</th>
+	<th>邮箱</th>
+	<th>
+		<span class="left-margin">操作</span>
+	</th>
+</tr>
+<tr class="show-tr-min show-hover" th:each="admin,st:${admins}">
+	<td th:id="${admin.id}" th:text="${st.count}"></td>
+	<td th:text="${admin.username}"></td>
+	<td th:text="${admin.phone}"></td>
+	<td th:text="${admin.qq}"></td>
+	<td th:text="${admin.email}"></td>
+	<td>
+		<span class="glyphicon glyphicon-pencil left-margin operate operate-min" onClick="edit_user(this);"></span>
+		<span class="glyphicon glyphicon-trash left-margin operate operate-min" onClick="delete_user(this);"></span>
+	</td>
+</tr>
+<tr class="show-tr" th:if="${admins.size()==0}">
+	<th>数据库中暂无符合条件的用户。</th>
+</tr>
+<tr class="info">
+	<td>
+		<span id="nowPage" th:text="${pageVO.nowPage}">
+		</span>
+		<span id="totalPages" th:text="${pageVO.totalPages}">
+		</span>
+	</td>
+</tr>

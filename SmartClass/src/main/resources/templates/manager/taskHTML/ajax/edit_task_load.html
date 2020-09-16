@@ -1,0 +1,107 @@
+
+<form id="form-hidden" action="/SmartClass/taskAPI/editTask" method="post" th:object="${task}" style="display: block; width: 800px; margin: 50px auto;">
+	<input type="hidden" name="id" th:value="*{id}" />
+	<div class="clearfix " style="display: block">
+		<span class="title">
+			<b>题干</b>
+		</span>
+	</div>
+	<ul class="input-ul ">
+		<li class="input-li">
+			<textarea id="info" name="title" class="input-border" style="margin-left: 0px; outline: none; resize: none;" rows="5" cols="120" notEmpty="请输入题干信息" th:text="*{title}"></textarea>
+		</li>
+	</ul>
+	<div class="clearfix " style="display: block">
+		<span class="title">
+			<b>选项</b>
+		</span>
+	</div>
+	<ul class="input-ul ">
+		<li class="input-li">
+			<span class="input-title">A 选项：</span>
+			<span class="input-border">
+				<input type="text" th:value="*{option1}" class="input-text" style="width: 190px;" name="option1" placeholder="此处填写选项1" notEmpty="请填写A选项的信息" />
+			</span>
+		</li>
+		<li class="input-li">
+			<span class="input-title">B 选项：</span>
+			<span class="input-border">
+				<input type="text" th:value="*{option2}" class="input-text" style="width: 190px;" name="option2" placeholder="此处填写选项2" notEmpty="请填写B选项的信息" />
+			</span>
+		</li>
+		<li class="input-li">
+			<span class="input-title">C 选项：</span>
+			<span class="input-border">
+				<input type="text" class="input-text" th:value="*{option3}" style="width: 190px;" name="option3" placeholder="此处填写选项3" notEmpty="请填写C选项的信息" />
+			</span>
+		</li>
+		<li class="input-li">
+			<span class="input-title">D 选项：</span>
+			<span class="input-border">
+				<input type="text" class="input-text" th:value="*{option4}" style="width: 190px;" name="option4" placeholder="此处填写选项4" notEmpty="请填写D选项的信息" />
+			</span>
+		</li>
+	</ul>
+	<div class="clearfix " style="display: block">
+		<span class="title">
+			<b>正确答案</b>
+		</span>
+	</div>
+	<ul class="input-ul" style="margin-top: 30px;">
+		<li class="input-li" style="margin-bottom: 0">
+			<input type="radio" name="answer" value="A" th:if="*{answer=='A'}" checked="checked">
+			<input type="radio" name="answer" value="A" th:unless="*{answer=='A'}">
+			<span class="input-title" style="margin-left: 5px; margin-right: 12px;">选项A</span>
+			<input type="radio" name="answer" value="B" th:if="*{answer=='B'}" checked="checked">
+			<input type="radio" name="answer" value="B" th:unless="*{answer=='B'}">
+			<span class="input-title" style="margin-left: 5px; margin-right: 12px;">选项B</span>
+			<input type="radio" name="answer" value="C" th:if="*{answer=='C'}" checked="checked">
+			<input type="radio" name="answer" value="C" th:unless="*{answer=='C'}">
+			<span class="input-title" style="margin-left: 5px; margin-right: 12px;">选项C</span>
+			<input type="radio" name="answer" value="D" th:if="*{answer=='D'}" checked="checked">
+			<input type="radio" name="answer" value="D" th:unless="*{answer=='D'}">
+			<span class="input-title" style="margin-left: 5px; margin-right: 12px;">选项D</span>
+		</li>
+	</ul>
+	<button .data-dismiss="modal" class="modal-submit big-modal-submit" id="submit" style="margin-left: 0" type="button">确认修改</button>
+</form>
+<script type="text/javascript">
+
+$(function(){
+
+
+
+	$(function() {
+
+		$("#submit").click(function() {
+			var pass = 1;
+			$("[notEmpty]").each(function(i, e) {
+				if ($(e).val() == "") {
+					alert_text("warning", $(e).attr("notEmpty"), function() {
+					});
+					pass = 0;
+					return false;
+				}
+
+			});
+			if (pass == 1) {
+				ajaxForm($('#form-hidden'),function(){
+					$("#big-util-modal").modal("toggle");
+					alert_text("ok","修改成功",function(){window.location.reload();});
+				},function(res){
+					$("#big-util-modal").modal("toggle");
+					alert_text("warning",res.msg);
+				})
+			}
+		})
+	});
+	//提交表单
+	
+
+		
+	
+});
+<!--
+
+//-->
+</script>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="include :: header('用户个人信息')"/>
+</head>
+
+<body class="gray-bg"
+      style="font: 14px Helvetica Neue, Helvetica, PingFang SC, 微软雅黑, Tahoma, Arial, sans-serif !important;">
+    <div class="tab-pane active" id="user_attri">
+        <div class="ibox-content">
+            <div class="echarts" id="echarts-radar-chart"></div>
+        </div>
+    </div>
+
+<th:block th:include="include :: footer"/>
+<th:block th:include="include :: echarts-js"/>
+<script>
+    var ta =[[${user.ta}]];
+    var pa =[[${user.pa}]];
+    var ce =[[${user.ce}]];
+    var la =[[${user.la}]];
+    var ca =[[${user.ca}]];
+    var ae =[[${user.ae}]];
+    var dataName = [[${user.loginName}]];
+    var radarChart = echarts.init(document.getElementById("echarts-radar-chart"));
+    var radaroption = {
+        title: {
+            text: '能力属性',
+            subtext: '仅供参考'
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+        legend: {
+            orient: 'vertical',
+            x: 'right',
+            y: 'bottom',
+            data: [dataName]
+        },
+        polar: [
+            {
+                indicator: [
+                    {text: '理论能力', max: 1},
+                    {text: '运用能力', max: 1},
+                    {text: '竞赛经验', max: 1},
+                    {text: '领导能力', max: 1},
+                    {text: '协作能力', max: 1},
+                    {text: '精力值', max: 1}
+                ]
+            }
+        ],
+        calculable: true,
+        series: [
+            {
+                name: '能力属性',
+                type: 'radar',
+                data: [
+                    {
+                        value: [ta, pa, ce, la, ca, ae],
+                        name: dataName
+                    }
+                ]
+            }
+        ]
+    };
+
+    radarChart.setOption(radaroption);
+    $(window).resize(radarChart.resize);
+</script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.widget.LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#AEEEEE"
+    tools:context=".MainActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="89dp"
+        android:layout_gravity="center"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/loginxx"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center"
+            android:background="@drawable/l_coin" />
+    </LinearLayout>
+    <EditText
+        android:text=""
+        android:id="@+id/loginUserNameEdit"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="@string/acc"
+        android:background="#ffffffff"
+        android:paddingLeft="20dp"
+        android:textColor="#000000"
+        >
+    </EditText>
+    <EditText
+        android:id="@+id/loginPasswordEdit"
+        android:password="true"
+        android:nextFocusDown="@+id/loginSubmit"
+        android:nextFocusRight="@+id/loginSubmit"
+        android:hint="@string/pwd"
+        android:background="#ffffffff"
+        android:paddingLeft="20dp"
+        android:textColor="#000000"
+        android:textSize="14sp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+    </EditText>
+
+    <Button
+        android:text="@string/loginSubmit"
+        android:id="@+id/loginSubmit"
+        android:textSize="24px"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+    </Button>
+
+
+</android.widget.LinearLayout>

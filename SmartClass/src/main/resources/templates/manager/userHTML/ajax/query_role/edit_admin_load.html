@@ -1,0 +1,41 @@
+<script type="text/javascript" src="/SmartClass/manager/js/queryUserPage/edit_user.js"></script>
+<form action="/SmartClass/userAPI/editAdmin" method="post" id="update_user">
+	<ul class="input-ul" style="width: 550px; margin: 20px auto 0 auto;">
+		<li class="input-li">
+			<input type="hidden" name="id" th:value="${admin.id}" />
+			<span class="input-title">账号：</span>
+			<span class="input-border" style="margin-left: 16px;" disabled>
+				<input type="text" class="input-text short" th:value="${admin.username} + ${'(不能修改)'}" />
+			</span>
+			<span class="input-title" style="margin-left: 20px;">密码：</span>
+			<span class="input-border">
+				<input type="password" class="input-text short" placeholder="在此处填写新的密码" name="password" th:value="${admin.password}" />
+			</span>
+		</li>
+		<li class="input-li">
+			<span class="input-title">邮箱：</span>
+			<span class="input-border" style="margin-left: 16px;">
+				<input type="text" class="input-text short" style="width: 179px;" name="email" placeholder="在此处填写新的邮箱地址" th:value="${admin.email}" />
+			</span>
+			<span class="input-title" style="margin-left: 20px;">电话：</span>
+			<span class="input-border">
+				<input type="text" class="input-text short" id="quantization" name="phone" placeholder="在此处填写新的手机号码" th:value="${admin.phone}" />
+			</span>
+		</li>
+		<li class="input-li">
+			<span class="input-title">Q&nbsp;Q：</span>
+			<span class="input-border" style="margin-left: 18px;">
+				<input type="text" class="input-text short" style="width: 179px;" name="qq" placeholder="在此处填写新的QQ号码" th:value="${admin.qq}" />
+			</span>
+		</li>
+		
+		<li class="input-li hidden" id="error_msg">
+			<span class="glyphicon glyphicon-exclamation-sign" style="color: red; margin-right: 5px;"></span>
+			<span id="err" style="color: red;"></span>
+		</li>
+	</ul>
+</form>
+<div class="clearfix" style="width: 521px; margin: 25px 124px 25px; display: block;">
+	<button class="modal-submit pull-left" id="edit_user" style="width: 250px; margin-left: 0; margin-right: 10px">确认修改用户信息</button>
+	<button class="modal-submit pull-right" id="reset" style="width: 250px;">重置</button>
+</div>

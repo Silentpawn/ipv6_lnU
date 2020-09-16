@@ -1,0 +1,31 @@
+<ul class="input-ul">
+	<li class="input-li" style="text-align: center;">
+		<span class="input-title" style="color: red;">确认接受该教师的注册申请？</span>
+	</li>
+	<li class="input-li hidden" id="error_msg" style="text-align: center;">
+		<span class="glyphicon glyphicon-exclamation-sign" style="color: red; margin-right: 5px;"></span>
+		<span id="err" style="color: red;"></span>
+	</li>
+</ul>
+<form action="/SmartClass/userAPI/acceptApplication" method="post" id="delete_user">
+	<input type="hidden" name="id" th:value="${teacher.id}">
+</form>
+<div style="width: 421px; margin: 25px auto 25px auto; display: block;">
+	<button class="modal-submit" id="delete_user_button" style="width: 200px; margin: 0 auto; display: block;">确认接受</button>
+</div>
+<script type="text/javascript">
+$(function(){
+
+	$("#delete_user_button").click(function(){
+		
+		ajaxForm($('#delete_user'),function(){
+			alert_text("ok","更改成功",function(){window.location.reload();});
+		},function(res){
+			$("#error_msg").children("#err").text(res.msg);
+			$("#error_msg").removeClass("hidden");
+		})
+		
+	});
+
+});
+</script>

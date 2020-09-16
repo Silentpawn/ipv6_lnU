@@ -1,0 +1,16 @@
+<script type="text/javascript" src="/SmartClass/manager/js/queryUserPage/delete_user.js"></script>
+<ul class="input-ul">
+	<li class="input-li" style="text-align: center;">
+		<span class="input-title" style="color: red;">确认删除这个用户？</span>
+	</li>
+	<li class="input-li hidden" id="error_msg" style="text-align: center;">
+		<span class="glyphicon glyphicon-exclamation-sign" style="color: red; margin-right: 5px;"></span>
+		<span id="err" style="color: red;"></span>
+	</li>
+</ul>
+<form action="/SmartClass/userAPI/deleteAdmin" method="post" id="delete_user">
+	<input type="hidden" name="id" th:value="${admin.id}">
+</form>
+<div style="width: 421px; margin: 25px auto 25px auto; display: block;">
+	<button class="modal-submit" id="delete_user_button" style="width: 200px; margin: 0 auto; display: block;">确认删除</button>
+</div>
